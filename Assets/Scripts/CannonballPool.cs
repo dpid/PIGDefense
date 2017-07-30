@@ -17,7 +17,7 @@ public class CannonballPool : MonoBehaviour {
         {
             Cannonball cannonball = Instantiate(cannonballPrefab) as Cannonball;
             cannonball.transform.parent = transform;
-            cannonball.Deactivate();
+            cannonball.gameObject.SetActive(false);
 
             cannonballs[i] = cannonball;
         }
@@ -28,7 +28,7 @@ public class CannonballPool : MonoBehaviour {
         Cannonball foundCannonball = null;
         foreach(Cannonball cannonball in cannonballs)
         {
-            if (cannonball.GetIsActive() == false)
+            if (cannonball.isActiveAndEnabled == false)
             {
                 foundCannonball = cannonball;
                 break;

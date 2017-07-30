@@ -26,27 +26,20 @@ public class Cannonball : MonoBehaviour
         explosion.Stop();
     }
 
-    public void Activate()
+    private void OnEnable()
     {
-		gameObject.transform.localScale = initialScale;
         rigidbody.isKinematic = false;
     }
 
-    public void Deactivate()
+    private void OnDisable()
     {
-		gameObject.transform.localScale = Vector3.zero;
-		rigidbody.isKinematic = true;
-    }
-
-    public bool GetIsActive()
-    {
-        return rigidbody.isKinematic == false;
+        rigidbody.isKinematic = true;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         MakeExplosion();
-        Deactivate();
+        gameObject.SetActive(false);
     }
 
     private void MakeExplosion()

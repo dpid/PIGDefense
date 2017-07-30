@@ -13,7 +13,7 @@ public class Cannon : MonoBehaviour
 
         if (cannonball != null)
         {
-			cannonball.Activate();
+			cannonball.gameObject.SetActive(true);
 			cannonball.transform.position = transform.position;
 			cannonball.transform.localRotation = Quaternion.identity;
 
