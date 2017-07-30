@@ -56,10 +56,13 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Castle castle = other.GetComponentInParent<Castle>();
-        if (castle != null)
+        if (health > 0)
         {
-            StartAttack(castle);
+			Castle castle = other.GetComponentInParent<Castle>();
+			if (castle != null)
+			{
+				StartAttack(castle);
+			}
         }
     }
 
@@ -193,6 +196,7 @@ public class Enemy : MonoBehaviour {
         health = 0;
         SetRigidbodiesIsKinematic(false);
         DetachRigidbodies();
+        StopAttack();
     }
 
 	private void SetRigidbodiesIsKinematic(bool isKinematic)
