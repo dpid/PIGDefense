@@ -23,11 +23,23 @@ public class Enemy : MonoBehaviour {
 
     private Castle targetCastle;
 
-	void Start () 
+    private TransformRestorer transformRestorer;
+
+	void Awake () 
     {
-        SetRigidbodiesIsKinematic(true);
-        SetNextPathNode();
+        InitTransformRestorer();
+        StartPath(path);
 	}
+
+    private void InitTransformRestorer()
+    {
+		transformRestorer = gameObject.AddComponent<TransformRestorer>();
+		for (int i = 0; i < transform.childCount; i++)
+		{
+			Transform child = transform.GetChild(i);
+			child.gameObject.AddComponent<TransformRestorer>();
+		}
+    }
 	
 	void Update () {
         if (health > 0)
@@ -51,6 +63,11 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    private void OnDisable()
+    {
+        StopAttack();
+    }
+
     private void StartAttack(Castle castle)
     {
 		targetCastle = castle;
@@ -67,6 +84,34 @@ public class Enemy : MonoBehaviour {
     {
         targetCastle.TakeDamage(attackStrength);
     }
+
+    [ContextMenu("RestartPath")]
+    public void RestartPath()
+    {
+        StartPath(path);
+    }
+
+	public void StartPath(Transform path)
+	{
+        transformRestorer.Restore();
+        SetRigidbodiesIsKinematic(true);
+        StopAttack();
+
+		this.path = path;
+
+        if (path != null)
+        {
+			pathNodeIndex = -1;
+			SetNextPathNode();
+
+			if (pathNode != null)
+			{
+				transform.position = pathNode.position;
+				SetNextPathNode();
+			} 
+        }
+		
+	}
 
 
     private void SetNextPathNode()
@@ -86,7 +131,7 @@ public class Enemy : MonoBehaviour {
     private void Turn()
     {
 		float turnStep = turnSpeed * Time.deltaTime;
-		Vector3 direction = pathNode.position - transform.localPosition;
+		Vector3 direction = pathNode.position - transform.position;
         direction.y = 0;
 		Quaternion targetRotation = Quaternion.LookRotation(direction);
 		this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, turnStep);
