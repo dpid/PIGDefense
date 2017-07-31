@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class EnemySpawner : MonoBehaviour {
     public float intervalSeconds = 5.0f;
 
     public Transform[] paths;
+
+    public UnityEvent OnEnemiesVanquished;
 
     public bool isAutoStarting = true;
 
@@ -47,7 +50,6 @@ public class EnemySpawner : MonoBehaviour {
 		}
 	}
 
-    [ContextMenu("StartSpawning")]
     public void StartSpawning()
     {
         HideEnemyInstances();
@@ -55,11 +57,13 @@ public class EnemySpawner : MonoBehaviour {
 
         StopSpawning();
         InvokeRepeating("Spawn", 1.0f, intervalSeconds);
+        InvokeRepeating("CheckEnemiesVanquished", 1.0f, 1.0f);
     }
 
     public void StopSpawning()
     {
-        CancelInvoke("Spawn");
+		CancelInvoke("Spawn");
+		CancelInvoke("CheckEnemiesVanquished");
     }
 
     private void Spawn()
@@ -102,6 +106,35 @@ public class EnemySpawner : MonoBehaviour {
         }
 
         return enemy;
+    }
+
+    private void CheckEnemiesVanquished()
+    {
+
+        bool isAllVanquished = true;
+
+        bool isEnemiesRemaining = enemyInstanceIndex < enemyInstances.Length -1;
+
+        if (isEnemiesRemaining)
+        {
+            isAllVanquished = false;
+        }
+        else
+        {
+			foreach (Enemy enemy in enemyInstances)
+			{
+				bool isAlive = enemy.isActiveAndEnabled && enemy.health > 0;
+				if (isAlive)
+				{
+					isAllVanquished = false;
+				}
+			}
+        }
+
+        if (isAllVanquished)
+        {
+            OnEnemiesVanquished.Invoke();    
+        }
     }
 
 }

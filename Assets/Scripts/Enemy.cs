@@ -69,6 +69,12 @@ public class Enemy : MonoBehaviour {
     private void OnDisable()
     {
         StopAttack();
+        Invoke("RestoreTransforms", 0.1f);
+    }
+
+    private void RestoreTransforms()
+    {
+        transformRestorer.Restore();
     }
 
     private void StartAttack(Castle castle)

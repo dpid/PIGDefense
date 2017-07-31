@@ -19,18 +19,32 @@ public class Flagpole : MonoBehaviour {
 
 	private void Update()
 	{
-        if (targetFlagPosition != flag.position)
-        {
-            float step = flagSpeed * Time.deltaTime;
-            flag.position = Vector3.Lerp(flag.position, targetFlagPosition, step);
-        }
+        UpdateFlagPosition();
 	}
 
+    private void UpdateFlagPosition()
+    {
+		if (targetFlagPosition != flag.position)
+		{
+			float step = flagSpeed * Time.deltaTime;
+			flag.position = Vector3.Lerp(flag.position, targetFlagPosition, step);
+		}
+    }
 
 	public void SetFlagRaisedPercentage(float percentage)
     {
         targetFlagPosition = Vector3.Lerp(poleBottom.position, poleTop.position, percentage);
     }
+
+	public void SetFlagToTop()
+	{
+		flag.position = poleTop.position;
+	}
+
+	public void SetFlagToBottom()
+	{
+		flag.position = poleBottom.position;
+	}
 
 
 }

@@ -17,6 +17,8 @@ public class Cannonball : MonoBehaviour
 
     private ParticleSystem explosion;
 
+    private float lifetime = 5.0f;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -29,16 +31,23 @@ public class Cannonball : MonoBehaviour
     private void OnEnable()
     {
         rigidbody.isKinematic = false;
+        Invoke("Disable", lifetime);
     }
 
     private void OnDisable()
     {
         rigidbody.isKinematic = true;
+        CancelInvoke();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         MakeExplosion();
+        Disable();
+    }
+
+    private void Disable()
+    {
         gameObject.SetActive(false);
     }
 

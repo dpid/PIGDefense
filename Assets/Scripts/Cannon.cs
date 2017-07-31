@@ -9,18 +9,20 @@ public class Cannon : MonoBehaviour
 
     public void Fire()
     {
-        Cannonball cannonball = cannonballPool.GetCannonball();
-
-        if (cannonball != null)
+        if (isActiveAndEnabled)
         {
-			cannonball.gameObject.SetActive(true);
-			cannonball.transform.position = transform.position;
-			cannonball.transform.localRotation = Quaternion.identity;
+			Cannonball cannonball = cannonballPool.GetCannonball();
 
-            Vector3 force = transform.forward * strength;
-			Rigidbody cannonballRigidbody = cannonball.GetComponent<Rigidbody>();
-			cannonballRigidbody.AddForce(force, ForceMode.Impulse);
+			if (cannonball != null)
+			{
+				cannonball.gameObject.SetActive(true);
+				cannonball.transform.position = transform.position;
+				cannonball.transform.localRotation = Quaternion.identity;
+
+				Vector3 force = transform.forward * strength;
+				Rigidbody cannonballRigidbody = cannonball.GetComponent<Rigidbody>();
+				cannonballRigidbody.AddForce(force, ForceMode.Impulse);
+			}
         }
-
     }
 }
