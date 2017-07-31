@@ -98,6 +98,8 @@ public class Castle : MonoBehaviour
             childRigidbody.AddExplosionForce(5.0f, transform.position, 5.0f, 1.0f, ForceMode.Impulse);
             Invoke("CallDeathEvent", deathDelaySeconds);
         }
+
+        flagpole.SetFlagToBottom();
     }
 
     private void CallDeathEvent()
