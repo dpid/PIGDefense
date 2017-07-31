@@ -3576,7 +3576,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4881492775586514, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.67
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 4881492775586514, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3608,21 +3608,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4881492775586514, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1.5368814
+      value: 1.3768274
       objectReference: {fileID: 0}
     - target: {fileID: 4881492775586514, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.5368809
+      value: 1.3768268
       objectReference: {fileID: 0}
     - target: {fileID: 4881492775586514, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
       propertyPath: m_LocalScale.z
-      value: 1.536881
+      value: 1.3768269
       objectReference: {fileID: 0}
     - target: {fileID: 1689854957029920, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 64270772706889106, guid: baa27094b6d4447049ffee2e940cc7fd,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 54911106579330344, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
+    - {fileID: 64270772706889106, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: baa27094b6d4447049ffee2e940cc7fd, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1404726850 stripped
