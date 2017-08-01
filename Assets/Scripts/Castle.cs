@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -72,6 +72,7 @@ public class Castle : MonoBehaviour
 
         SetHealth(initialHealth);
         flagpole.SetFlagToTop();
+        flagpole.enabled = true;
     }
 
     public void TakeDamage(int damage = 1)
@@ -100,6 +101,7 @@ public class Castle : MonoBehaviour
         }
 
         flagpole.SetFlagToBottom();
+        flagpole.enabled = false;
     }
 
     private void CallDeathEvent()
