@@ -2,57 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PathFollower))]
 public class Enemy : MonoBehaviour {
 
-    public Transform path;
-
     public int health = 1;
-    public float speed = 1.0f;
-    public float turnSpeed = 1.0f;
-    public float hopStrength = 0.05f;
     public int attackStrength = 1;
 
-    private int pathNodeIndex = -1;
-    private Transform pathNode;
-
-    private float hopDamper = 0.1f;
-	private float hopOffset = 0.0f;
-	private float hopPositionOffset = 0.0f;
-
-    private Vector3 lastMovePosition;
-
-    private Castle targetCastle;
-
+    private int initialHealth;
+    private PathFollower pathFollower;
     private TransformRestorer transformRestorer;
+    private Castle targetCastle;
 
 	void Awake () 
     {
+        InitHealth();
+        InitPathFollower();
         InitTransformRestorer();
-        StartPath(path);
-	}
+    }
+
+    private void InitHealth()
+    {
+        initialHealth = health;    
+    }
+
+    private void InitPathFollower()
+    {
+        pathFollower = GetComponent<PathFollower>();
+    }
 
     private void InitTransformRestorer()
     {
-		transformRestorer = gameObject.AddComponent<TransformRestorer>();
-		for (int i = 0; i < transform.childCount; i++)
-		{
-			Transform child = transform.GetChild(i);
-			child.gameObject.AddComponent<TransformRestorer>();
-		}
-    }
-	
-	void Update () {
-        if (health > 0)
+        transformRestorer = gameObject.GetComponent<TransformRestorer>();
+        if (transformRestorer == null)
         {
-			if (pathNode != null)
-			{
-				Turn();
-				Move();
-			}
-
-			Hop();
-        }
-	}
+            transformRestorer = gameObject.AddComponent<TransformRestorer>();
+        }		
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -64,6 +49,11 @@ public class Enemy : MonoBehaviour {
 				StartAttack(castle);
 			}
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        StopAttack();
     }
 
     private void OnDisable()
@@ -94,112 +84,40 @@ public class Enemy : MonoBehaviour {
         targetCastle.TakeDamage(attackStrength);
     }
 
-    [ContextMenu("RestartPath")]
     public void RestartPath()
     {
-        StartPath(path);
+        Reset();
+        pathFollower.RestartPath();
     }
 
 	public void StartPath(Transform path)
 	{
-        transformRestorer.Restore();
-        SetRigidbodiesIsKinematic(true);
-        StopAttack();
-
-		this.path = path;
-
-        if (path != null)
-        {
-			pathNodeIndex = -1;
-			SetNextPathNode();
-
-			if (pathNode != null)
-			{
-				transform.position = pathNode.position;
-				SetNextPathNode();
-			} 
-        }
-		
+        Reset();
+		pathFollower.StartPath(path);
 	}
 
-
-    private void SetNextPathNode()
+    private void Reset()
     {
-        pathNodeIndex += 1;
-
-        if (pathNodeIndex < path.childCount)
-        {
-            pathNode = path.GetChild(pathNodeIndex);
-        }
-        else
-        {
-            pathNode = null;
-        }
+        health = initialHealth;
+        pathFollower.enabled = true;
+		transformRestorer.Restore();
+		SetRigidbodiesIsKinematic(true);
+		StopAttack();
     }
 
-    private void Turn()
+    public void TakeDamage(int damage)
     {
-		float turnStep = turnSpeed * Time.deltaTime;
-		Vector3 direction = pathNode.position - transform.position;
-        direction.y = 0;
-		Quaternion targetRotation = Quaternion.LookRotation(direction);
-		this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, turnStep);
-    }
-
-    private void Move()
-    {
-
-		Vector3 transformPosition = transform.position;
-		transformPosition.y = 0;
-
-		Vector3 pathNodePosition = pathNode.position;
-		pathNodePosition.y = 0;
-
-		float step = speed * Time.deltaTime;
-		Vector3 position = Vector3.MoveTowards(transformPosition, pathNodePosition, step);
-
-
-        Vector3 raycastPosition = position + Vector3.up;
-		RaycastHit hit;
-
-		if (Physics.Raycast(raycastPosition, Vector3.down, out hit))
+        health -= damage;
+        if (health <= 0)
         {
-            position.y = hit.point.y;
+            Die();
         }
-
-        transform.position = position;
-        lastMovePosition = position;
-
-		float distance = Vector3.Distance(transformPosition, pathNodePosition);
-		if (distance <= step)
-		{
-			SetNextPathNode();
-		}
-    }
-
-
-    private void Hop()
-    {
-        if (hopPositionOffset <= 0.0f)
-        {
-            hopOffset = hopStrength;
-        }
-        else
-        {
-            hopOffset -= hopStrength * hopDamper;
-		}
-
-        hopPositionOffset += hopOffset;
-
-        Vector3 hopPosition = lastMovePosition;
-        hopPosition.y += hopPositionOffset;
-
-        transform.position = hopPosition;
     }
 
     public void Die()
     {
         health = 0;
+        pathFollower.enabled = false;
         SetRigidbodiesIsKinematic(false);
         DetachRigidbodies();
         StopAttack();

@@ -17,7 +17,14 @@ public class TransformRestorer : MonoBehaviour {
         initialChildren = new Transform[transform.childCount];
         for (int i = 0; i < initialChildren.Length; i++)
         {
-            initialChildren[i] = transform.GetChild(i);
+            Transform child = transform.GetChild(i);
+            TransformRestorer childTransformRestorer = child.GetComponent<TransformRestorer>();
+            if (childTransformRestorer == null)
+            {
+                child.gameObject.AddComponent<TransformRestorer>();
+            }
+
+            initialChildren[i] = child;
         }
     }
 
