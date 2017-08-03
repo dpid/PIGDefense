@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: eae7ff1938b812040bcf17712e8768a6
-timeCreated: 1501521212
+guid: d017fd476bcd3474996ca9176c864c96
+timeCreated: 1501781039
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: pCube3
-    4300002: Sword
+    4300000: UIQuad
   materials:
     importMaterials: 1
     materialName: 0

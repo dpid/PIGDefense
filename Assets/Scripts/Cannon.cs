@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +20,11 @@ public class Cannon : MonoBehaviour
 				cannonball.transform.localRotation = Quaternion.identity;
 
 				Vector3 force = transform.forward * strength;
-				Rigidbody cannonballRigidbody = cannonball.GetComponent<Rigidbody>();
+                Vector3 torque = new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f));
+
+                Rigidbody cannonballRigidbody = cannonball.GetComponent<Rigidbody>();
 				cannonballRigidbody.AddForce(force, ForceMode.Impulse);
+                cannonballRigidbody.AddTorque(torque);
 			}
         }
     }

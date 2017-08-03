@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class Cannonball : MonoBehaviour
     private void OnEnable()
     {
         rigidbody.isKinematic = false;
-        Invoke("Disable", lifetime);
+        Invoke("Disable", lifetime); 
     }
 
     private void OnDisable()
@@ -42,8 +42,8 @@ public class Cannonball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        MakeExplosion();
         Disable();
+        MakeExplosion();    
     }
 
     private void Disable()

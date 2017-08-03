@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 00d3d578f7e9d6043bc078319a3ee969
-timeCreated: 1501519484
+guid: 073ceb8b4ecfebd49b1dec3fc78baf7b
+timeCreated: 1501781961
 licenseType: Pro
 ModelImporter:
   serializedVersion: 21
@@ -9,9 +9,9 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Pig
+    4300000: Cannonball
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
