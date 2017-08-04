@@ -19,6 +19,7 @@ public class PathFollower : MonoBehaviour {
 
 	public UnityEvent OnStarted;
 	public UnityEvent OnFinished;
+    public UnityEvent OnHop;
 
 	private int pathNodeIndex = -1;
 	private Transform pathNode;
@@ -150,6 +151,7 @@ public class PathFollower : MonoBehaviour {
 			if (hopPositionOffset <= 0.0f)
 			{
 				hopOffset = hopStrength;
+                OnHop.Invoke();
 			}
 			else
 			{
