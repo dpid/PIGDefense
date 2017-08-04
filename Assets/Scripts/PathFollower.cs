@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// The game object will move along the child transform positions of a path object.
+/// </summary>
 public class PathFollower : MonoBehaviour {
 
 	public Transform path;
@@ -160,6 +163,20 @@ public class PathFollower : MonoBehaviour {
 
 			transform.position = hopPosition;
         }	
+    }
+
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+
+	public void SetTurnSpeed(float speed)
+	{
+        turnSpeed = speed;
 	}
 
+	public void SetHopStrength(float strength)
+	{
+        hopStrength = strength;
+	}
 }

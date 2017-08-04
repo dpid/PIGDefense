@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Cannonball makes an explosion when it enters a collider.
+/// Any enemies within the explosion radius will be killed.
+/// </summary>
 public class Cannonball : MonoBehaviour
 {
 
@@ -31,7 +34,7 @@ public class Cannonball : MonoBehaviour
     private void OnEnable()
     {
         rigidbody.isKinematic = false;
-        Invoke("Disable", lifetime); 
+        Invoke("Disable", lifetime); // disables the cannonball in case it never hits anything
     }
 
     private void OnDisable()

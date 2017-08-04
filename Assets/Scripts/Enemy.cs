@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Enemy uses PathFollower to move along a path. Attacks happen when it enters a trigger collider belonging to a Castle.
+/// </summary>
 [RequireComponent(typeof(PathFollower))]
 public class Enemy : MonoBehaviour {
 

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Simple menu system that provides helper methods for showing and hiding menu elements.
+/// </summary>
 public class MainMenu : MonoBehaviour {
 
     public GameObject startButton;

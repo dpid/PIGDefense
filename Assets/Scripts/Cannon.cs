@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Cannon shoots out a cannonball instance.
+/// </summary>
 public class Cannon : MonoBehaviour
 {
     public CannonballPool cannonballPool;

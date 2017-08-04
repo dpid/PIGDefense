@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Restores the transform hierarchy when the Restore() method is called.
+/// </summary>
 public class TransformRestorer : MonoBehaviour {
 
     private Vector3 initialPosition;

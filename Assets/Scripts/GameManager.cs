@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// GameManager starts and stops the game. It also listens for events to determine the game end state.
+/// </summary>
 public class GameManager : MonoBehaviour {
 
     public MainMenu mainMenu;

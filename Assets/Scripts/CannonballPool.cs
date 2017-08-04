@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// CannonballPool instantiates a pool of cannonballs that can be reused.
+/// </summary>
 public class CannonballPool : MonoBehaviour {
 
     public Cannonball cannonballPrefab;

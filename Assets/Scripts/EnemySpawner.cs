@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Enemy spawner spawns enemy prefabs at a given interval and assigns the instances to a random path.
+/// </summary>
 public class EnemySpawner : MonoBehaviour {
 
     public Enemy enemyPrefab;

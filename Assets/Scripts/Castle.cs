@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Castle takes damage and invokes an OnDeath event when health is zero.
+/// It also uses a TransformRestorer to allow the Castle to rebuild. 
+/// </summary>
 public class Castle : MonoBehaviour
 {
     public int health = 10;
@@ -53,13 +57,13 @@ public class Castle : MonoBehaviour
         SetHealth(health);
     }
 
-    private void AddHealth(int value)
+    public void AddHealth(int value)
     {
         health += value;
         SetFlagpoleRaisedPercentage();
     }
 
-    private void SetHealth(int value)
+    public void SetHealth(int value)
     {
         health = value;
         SetFlagpoleRaisedPercentage();

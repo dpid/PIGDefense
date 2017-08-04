@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Flagpole animates the raising and lowering of a flag to a given percentage of height.
+/// </summary>
 public class Flagpole : MonoBehaviour {
 
     public float flagSpeed = 0.1f;
