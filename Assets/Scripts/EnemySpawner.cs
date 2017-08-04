@@ -11,12 +11,14 @@ public class EnemySpawner : MonoBehaviour {
 
     public Transform[] paths;
 
-    public UnityEvent OnEnemiesVanquished;
+    public UnityEvent OnDeath;
 
     public bool isAutoStarting = true;
 
     private Enemy[] enemyInstances;
     private int enemyInstanceIndex;
+
+    public bool isDead { get; protected set; }
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class EnemySpawner : MonoBehaviour {
             Enemy enemy = Instantiate(enemyPrefab) as Enemy;
             enemy.transform.parent = transform;
             enemy.transform.position = transform.position;
+            enemy.OnDeath.AddListener(OnEnemyDeath);
             enemyInstances[i] = enemy;
         }
     }
@@ -57,13 +60,11 @@ public class EnemySpawner : MonoBehaviour {
 
         StopSpawning();
         InvokeRepeating("Spawn", 1.0f, intervalSeconds);
-        InvokeRepeating("CheckEnemiesVanquished", 1.0f, 1.0f);
     }
 
     public void StopSpawning()
     {
 		CancelInvoke("Spawn");
-		CancelInvoke("CheckEnemiesVanquished");
     }
 
     private void Spawn()
@@ -108,32 +109,31 @@ public class EnemySpawner : MonoBehaviour {
         return enemy;
     }
 
-    private void CheckEnemiesVanquished()
+    private void OnEnemyDeath()
     {
-
-        bool isAllVanquished = true;
+        isDead = true;
 
         bool isEnemiesRemaining = enemyInstanceIndex < enemyInstances.Length -1;
 
         if (isEnemiesRemaining)
         {
-            isAllVanquished = false;
+            isDead = false;
         }
         else
         {
 			foreach (Enemy enemy in enemyInstances)
 			{
-				bool isAlive = enemy.isActiveAndEnabled && enemy.health > 0;
+                bool isAlive = enemy.isActiveAndEnabled && enemy.isDead == false;
 				if (isAlive)
 				{
-					isAllVanquished = false;
+					isDead = false;
 				}
 			}
         }
 
-        if (isAllVanquished)
+        if (isDead)
         {
-            OnEnemiesVanquished.Invoke();    
+            OnDeath.Invoke();    
         }
     }
 

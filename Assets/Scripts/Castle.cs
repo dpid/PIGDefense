@@ -11,6 +11,14 @@ public class Castle : MonoBehaviour
     public float deathDelaySeconds;
     public UnityEvent OnDeath;
 
+    public bool isDead
+    {
+        get
+        {
+            return health <= 0;    
+        }
+    }
+
     private int initialHealth;
     private TransformRestorer transformRestorer;
 
@@ -65,7 +73,6 @@ public class Castle : MonoBehaviour
 
     public void Restore()
     {
-        
         SetIsKinematic(false);
         transformRestorer.Restore();
         SetIsKinematic(true);
@@ -88,7 +95,6 @@ public class Castle : MonoBehaviour
         }
     }
 
-    [ContextMenu("Die")]
     public void Die()
     {
         health = 0;
@@ -97,11 +103,12 @@ public class Castle : MonoBehaviour
         foreach(Rigidbody childRigidbody in rigidbodies){
             childRigidbody.isKinematic = false;
             childRigidbody.AddExplosionForce(5.0f, transform.position, 5.0f, 1.0f, ForceMode.Impulse);
-            Invoke("CallDeathEvent", deathDelaySeconds);
         }
 
         flagpole.SetFlagToBottom();
         flagpole.enabled = false;
+
+        Invoke("CallDeathEvent", deathDelaySeconds);
     }
 
     private void CallDeathEvent()

@@ -1,12 +1,23 @@
 ﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(PathFollower))]
 public class Enemy : MonoBehaviour {
 
     public int health = 1;
     public int attackStrength = 1;
+
+    public UnityEvent OnAttack;
+    public UnityEvent OnDeath;
+
+    public bool isDead{
+        get
+        {
+            return (health <= 0);
+        }
+    }
 
     private int initialHealth;
     private PathFollower pathFollower;
@@ -82,6 +93,7 @@ public class Enemy : MonoBehaviour {
     private void Attack()
     {
         targetCastle.TakeDamage(attackStrength);
+        OnAttack.Invoke();
     }
 
     public void RestartPath()
@@ -121,6 +133,7 @@ public class Enemy : MonoBehaviour {
         SetRigidbodiesIsKinematic(false);
         DetachRigidbodies();
         StopAttack();
+        OnDeath.Invoke();
     }
 
 	private void SetRigidbodiesIsKinematic(bool isKinematic)
