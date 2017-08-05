@@ -28,28 +28,14 @@ public class Castle : MonoBehaviour
 
     private void Start()
     {
-        InitHealth();
         InitTransformRestorer();
+        InitHealth();
     }
 
 	private void InitTransformRestorer()
 	{
 		transformRestorer = gameObject.AddComponent<TransformRestorer>();
-		for (int i = 0; i < transform.childCount; i++)
-		{
-			Transform child = transform.GetChild(i);
-			child.gameObject.AddComponent<TransformRestorer>();
-		}
 	}
-
-    private void SetIsKinematic(bool isKinemenatic)
-    {
-        Rigidbody[] rigidbodyChildren = GetComponentsInChildren<Rigidbody>();
-        foreach(Rigidbody childRigidbody in rigidbodyChildren)
-        {
-            childRigidbody.isKinematic = isKinemenatic;
-        }
-    }
 
     private void InitHealth()
     {
@@ -73,6 +59,15 @@ public class Castle : MonoBehaviour
 	{
 		float percentage = health * 1.0f / initialHealth;
 		flagpole.SetFlagRaisedPercentage(percentage);
+	}
+
+	private void SetIsKinematic(bool isKinemenatic)
+	{
+		Rigidbody[] rigidbodyChildren = GetComponentsInChildren<Rigidbody>();
+		foreach (Rigidbody childRigidbody in rigidbodyChildren)
+		{
+			childRigidbody.isKinematic = isKinemenatic;
+		}
 	}
 
     public void Restore()
