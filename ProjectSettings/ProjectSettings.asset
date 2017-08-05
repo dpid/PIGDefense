@@ -7,7 +7,7 @@ PlayerSettings:
   productGUID: d8114f2e1e2634e348e6748e87485c82
   AndroidProfiler: 0
   defaultScreenOrientation: 4
-  targetDevice: 2
+  targetDevice: 0
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: dpid.co
@@ -143,6 +143,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: co.dpid.PIGDefense
     Standalone: .Company.ProductNameame
+    iOS: co.dpid.PIGDefense
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
