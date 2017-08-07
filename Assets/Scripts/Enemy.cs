@@ -9,7 +9,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(PathFollower))]
 public class Enemy : MonoBehaviour {
 
-    public int health = 1;
+    public int health = 10;
     public int attackStrength = 1;
 
     public UnityEvent OnAttack;

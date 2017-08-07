@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Flagpole : MonoBehaviour {
 
-    public float flagSpeed = 0.1f;
+    public float flagSpeed = 0.5f;
 
     public Transform flag;
     public Transform poleTop;

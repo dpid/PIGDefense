@@ -57,7 +57,7 @@ LightmapSettings:
     serializedVersion: 9
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
+    m_TextureWidth: 4096
     m_TextureHeight: 1024
     m_AO: 0
     m_AOMaxDistance: 1
@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 172391182}
   - component: {fileID: 172391181}
   m_Layer: 0
-  m_Name: EnemySpawner - Paratroopers
+  m_Name: EnemySpawner - Parachuters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f706560f75142c18ff954673eb07e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 114036935374311962, guid: bb31f9d0aff204876a5db3df29b67c61,
+  enemyPrefab: {fileID: 114341294793606372, guid: bb31f9d0aff204876a5db3df29b67c61,
     type: 2}
   enemyCount: 3
   intervalSeconds: 15
@@ -5122,7 +5122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1f706560f75142c18ff954673eb07e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 114036935374311962, guid: e52c5e51825fb4ff19be21acdfb5d8a5,
+  enemyPrefab: {fileID: 114936478030924046, guid: e52c5e51825fb4ff19be21acdfb5d8a5,
     type: 2}
   enemyCount: 8
   intervalSeconds: 5
